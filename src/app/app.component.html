@@ -1,0 +1,38 @@
+<div class="">
+  <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+    <label for="">Lot Address : </label>
+    <input type="number" min="1" [(ngModel)]="lot" formControlName="lot">
+    <label for="">Vehicle Number : </label>
+    <input type="number" min="1" [(ngModel)]="vehicleNumber" formControlName="vehicleNumber">
+    <label for="">Parking Duration (In Mins) : </label>
+    <input type="number" min="1" [(ngModel)]="parkingDuration" (keyup)="calculateAmount($event)"
+      formControlName="parkingDuration">
+    <label for="">Amount : </label>
+    <input type="text" readonly [(ngModel)]="parkingAmount" formControlName="parkingAmount">
+    <input type="submit" name="" value="ParkNow">
+  </form>
+  <span class="errors" *ngIf="vehicleForm.invalid && vehicleForm.dirty">
+    <p class="error">{{error_message}}</p>
+  </span>
+  <hr>
+  <h1>Parked vehicle Report</h1>
+  <hr>
+  <table>
+    <thead>
+      <th><strong>ID</strong></th>
+      <th><strong>Lot</strong></th>
+      <th><strong>Vehicle Number</strong></th>
+      <th><strong>Duration</strong></th>
+      <th><strong>Amount</strong></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parking of parkings">
+        <td>{{ parking.id }}</td>
+        <td>{{ parking.lot }}</td>
+        <td>{{ parking.vehicleNumber }}</td>
+        <td>{{ parking.parkingDuration }}</td>
+        <td>{{ parking.parkingAmount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
